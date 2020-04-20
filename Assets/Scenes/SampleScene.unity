@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 79623371}
   - component: {fileID: 79623375}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -211,7 +211,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &79623375
 Rigidbody:
@@ -411,7 +411,7 @@ Transform:
   m_LocalScale: {x: 2, y: 1, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -508,8 +508,9 @@ GameObject:
   - component: {fileID: 1538646441}
   - component: {fileID: 1538646440}
   - component: {fileID: 1538646439}
+  - component: {fileID: 1538646442}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -588,6 +589,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538646437}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1538646442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1538646437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e60a69d97b8980c419fcb33984775a91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHook: {fileID: 1711661491}
 --- !u!1 &1711661486
 GameObject:
   m_ObjectHideFlags: 0
@@ -602,7 +616,7 @@ GameObject:
   - component: {fileID: 1711661488}
   - component: {fileID: 1711661491}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

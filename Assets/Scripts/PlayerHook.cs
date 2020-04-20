@@ -10,9 +10,7 @@ public class PlayerHook : MonoBehaviour
     [SerializeField]
     private float hookDistance;
 
-    private bool hasThrown;
-    protected bool hookHit;
-    private Sequence hookTravel;
+    public bool hasThrown { get; set; }
 
     // Update is called once per frame
     void Update()
@@ -25,19 +23,13 @@ public class PlayerHook : MonoBehaviour
                 ThrowHook(hasThrown);
             }
         }
-
-        //if(hookHit)
-        //{
-        //    hookTravel.Kill();
-        //    hookHit = false;
-        //}
     }
 
     private void ThrowHook(bool onHit)
     {
         if (onHit)
         {
-            hookTravel.Append(hook.transform.DOMoveZ(hookDistance, 1.5f).SetEase(Ease.OutSine).OnComplete(() => ThrowHook(false)));
+            hook.transform.DOMoveZ(hookDistance, 1.5f).SetEase(Ease.OutSine).OnComplete(() => ThrowHook(false));
         }
         else
         {
