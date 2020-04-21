@@ -10,7 +10,15 @@ public class PlayerHook : MonoBehaviour
     [SerializeField]
     private float hookDistance;
 
+    private HookDetection hookDetection;
+    private Sequence hookSequence;
+
     public bool hasThrown { get; set; }
+
+    private void Start()
+    {
+        hookDetection = gameObject.GetComponentInChildren<HookDetection>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -23,17 +31,27 @@ public class PlayerHook : MonoBehaviour
                 ThrowHook(hasThrown);
             }
         }
+
+        if(hookDetection.enemyHit)
+        {
+            hookSequence.Kill();
+        }
     }
 
     private void ThrowHook(bool onHit)
     {
         if (onHit)
         {
-            hook.transform.DOMoveZ(hookDistance, 1.5f).SetEase(Ease.OutSine).OnComplete(() => ThrowHook(false));
+            hookSequence = DOTween.Sequence();
+            hookSequence.Append(hook.transform.DOMoveZ(hookDistance, 1.5f).SetEase(Ease.OutSine).OnKill( () => ThrowHook(false)).OnComplete(() => ThrowHook(false)));
         }
         else
         {
-            hook.transform.DOMoveZ(transform.position.z + 0.5f, 1.5f).SetEase(Ease.OutSine).OnComplete(() => hasThrown = false);
+            hook.transform.DOMoveZ(transform.position.z + 0.5f, 1.5f).SetEase(Ease.OutSine).OnComplete(() => 
+            {
+                hasThrown = false;
+                hookDetection.HookRelease(true);
+            });
         }
     }
 }

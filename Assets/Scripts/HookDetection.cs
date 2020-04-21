@@ -8,6 +8,7 @@ public class HookDetection : MonoBehaviour
     private PlayerHook playerHook;
 
     private GameObject hookedEnemy;
+    public bool enemyHit { get; set; }
 
     private void OnTriggerEnter(Collider other)
     { 
@@ -15,6 +16,7 @@ public class HookDetection : MonoBehaviour
         {
             if (other.gameObject.tag == "Enemy")
             {
+                enemyHit = true;
                 hookedEnemy = other.gameObject;
                 hookedEnemy.transform.parent = this.gameObject.transform;
             }
@@ -26,6 +28,16 @@ public class HookDetection : MonoBehaviour
                 hookedEnemy.transform.parent = null;
                 hookedEnemy = null;
             }
+        }
+    }
+
+    public void HookRelease(bool animFinished)
+    {
+        if(animFinished && hookedEnemy != null)
+        {
+            enemyHit = false;
+            hookedEnemy.transform.parent = null;
+            hookedEnemy = null;
         }
     }
 }
